@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_productos"
+        android:title="Productos"
+        android:icon="@android:drawable/ic_menu_view"/>
+
+    <item
+        android:id="@+id/menu_ventas"
+        android:title="Ventas"
+        android:icon="@android:drawable/ic_menu_agenda"/>
+
+    <item
+        android:id="@+id/menu_vendidos"
+        android:title="Vendidos"
+        android:icon="@android:drawable/ic_menu_sort_by_size"/>
+
+    <item
+        android:id="@+id/menu_configuracion"
+        android:title="Config"
+        android:icon="@android:drawable/ic_menu_manage"/>
+
+</menu>
