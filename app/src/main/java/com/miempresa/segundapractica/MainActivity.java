@@ -9,48 +9,41 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigation = findViewById(R.id.bottomNavigation);
+        loadFragment(new ProductosFragment());
 
-        // Pantalla inicial
-        if (savedInstanceState == null) {
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
 
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, new VentasFragment())
-                    .commit();
-        }
-
-        // Solo dejar funcionando VentasFragment
-        bottomNavigation.setOnItemSelectedListener(item -> {
+        bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment fragment = null;
 
-            int id = item.getItemId();
-
-            if (id == R.id.menu_ventas) {
-
+            if(item.getItemId() == R.id.menu_productos){
+                fragment = new ProductosFragment();
+            }else if(item.getItemId() == R.id.menu_ventas){
                 fragment = new VentasFragment();
+            }else if(item.getItemId() == R.id.menu_vendidos){
+                fragment = new ProductosVendidosFragment();
+            }else if(item.getItemId() == R.id.menu_configuracion){
+                fragment = new ConfiguracionFragment();
             }
 
-            if (fragment != null) {
-
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, fragment)
-                        .commit();
-
-                return true;
-            }
-
-            return false;
+            return loadFragment(fragment);
         });
+    }
+
+    private boolean loadFragment(Fragment fragment){
+        if(fragment != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 }
